@@ -34,19 +34,12 @@ public class Sodium {
 
 
     public native int sodium_init();
-
     public native void sodium_increment(byte[] n, int nLen);
-
     public native void sodium_add(byte[] a, byte[] b, int len);
-
     public native int sodium_is_zero(byte[] n, int nLen);
-
     public native void sodium_stackzero(int len);
-
     public native int sodium_memcmp(byte[] b1, byte[] b2, int len);
-
     public native int sodium_base64_encoded_len(int binLen, int variant);
-
     public native int sodium_compare(byte[] b1, byte[] b2, int len);
 
 
@@ -61,10 +54,10 @@ public class Sodium {
                                      Pointer hexEnd);
 
     public native String sodium_bin2base64(byte[] b64,
-                                           int b64MaxLen,
-                                           byte[] bin,
-                                           int binLen,
-                                           int variant);
+                                          int b64MaxLen,
+                                          byte[] bin,
+                                          int binLen,
+                                          int variant);
 
     public native int sodium_base642bin(byte[] bin,
                                         int binMaxLen,
@@ -76,27 +69,24 @@ public class Sodium {
                                         int variant);
 
 
+
+
     //// -------------------------------------------|
     //// SECURE MEMORY
     //// -------------------------------------------|
 
     public native int sodium_memzero(byte[] pnt, int len);
-
     public native int sodium_mlock(byte[] addr, int len);
-
     public native int sodium_munlock(byte[] addr, int len);
-
     public native Pointer sodium_malloc(int size);
-
     public native Pointer sodium_allocarray(int count, int size);
-
     public native void sodium_free(Pointer p);
-
     public native int sodium_mprotect_noaccess(Pointer ptr);
-
     public native int sodium_mprotect_readonly(Pointer ptr);
-
     public native int sodium_mprotect_readwrite(Pointer ptr);
+
+
+
 
 
     //// -------------------------------------------|
@@ -106,6 +96,8 @@ public class Sodium {
     public native int sodium_pad(IntByReference paddedBuffLen, Pointer buf, int unpaddedBufLen, int blockSize, int maxBufLen);
 
     public native int sodium_unpad(IntByReference unPaddedBuffLen, Pointer buf, int paddedBufLen, int blockSize);
+
+
 
 
     //// -------------------------------------------|
@@ -121,28 +113,33 @@ public class Sodium {
     public native void randombytes_buf_deterministic(byte[] buffer, int size, byte[] seed);
 
 
+
+
+
     //// -------------------------------------------|
     //// PASSWORD HASHING
     //// -------------------------------------------|
 
     public native int crypto_pwhash(byte[] outputHash,
-                                    long outputHashLen,
-                                    byte[] password,
-                                    long passwordLen,
-                                    byte[] salt,
-                                    long opsLimit,
-                                    NativeLong memLimit,
-                                    int alg);
+                                 long outputHashLen,
+                                 byte[] password,
+                                 long passwordLen,
+                                 byte[] salt,
+                                 long opsLimit,
+                                 NativeLong memLimit,
+                                 int alg);
 
     public native int crypto_pwhash_str(byte[] outputStr,
-                                        byte[] password,
-                                        long passwordLen,
-                                        long opsLimit,
-                                        NativeLong memLimit);
+                                     byte[] password,
+                                     long passwordLen,
+                                     long opsLimit,
+                                     NativeLong memLimit);
 
     public native int crypto_pwhash_str_verify(byte[] hash, byte[] password, long passwordLen);
 
     public native int crypto_pwhash_str_needs_rehash(byte[] hash, long opsLimit, NativeLong memLimit);
+
+
 
 
     //// -------------------------------------------|
@@ -172,6 +169,8 @@ public class Sodium {
     public native int crypto_hash_sha512_final(Hash.State512 state, byte[] out);
 
 
+
+
     //// -------------------------------------------|
     //// KEY DERIVATION FUNCTIONS
     //// -------------------------------------------|
@@ -179,10 +178,13 @@ public class Sodium {
     public native void crypto_kdf_keygen(byte[] masterKey);
 
     public native int crypto_kdf_derive_from_key(byte[] subkey,
-                                                 int subkeyLen,
-                                                 long subkeyId,
-                                                 byte[] context,
-                                                 byte[] masterKey);
+                                          int subkeyLen,
+                                          long subkeyId,
+                                          byte[] context,
+                                          byte[] masterKey);
+
+
+
 
 
     //// -------------------------------------------|
@@ -210,6 +212,10 @@ public class Sodium {
     );
 
 
+
+
+
+
     //// -------------------------------------------|
     //// SECRET BOX
     //// -------------------------------------------|
@@ -218,30 +224,31 @@ public class Sodium {
 
 
     public native int crypto_secretbox_easy(byte[] cipherText,
-                                            byte[] message,
-                                            long messageLen,
-                                            byte[] nonce,
-                                            byte[] key);
+                                     byte[] message,
+                                     long messageLen,
+                                     byte[] nonce,
+                                     byte[] key);
 
     public native int crypto_secretbox_open_easy(byte[] message,
-                                                 byte[] cipherText,
-                                                 long cipherTextLen,
-                                                 byte[] nonce,
-                                                 byte[] key);
+                                          byte[] cipherText,
+                                          long cipherTextLen,
+                                          byte[] nonce,
+                                          byte[] key);
 
     public native int crypto_secretbox_detached(byte[] cipherText,
-                                                byte[] mac,
-                                                byte[] message,
-                                                long messageLen,
-                                                byte[] nonce,
-                                                byte[] key);
+                                         byte[] mac,
+                                         byte[] message,
+                                         long messageLen,
+                                         byte[] nonce,
+                                         byte[] key);
 
     public native int crypto_secretbox_open_detached(byte[] message,
-                                                     byte[] cipherText,
-                                                     byte[] mac,
-                                                     long cipherTextLen,
-                                                     byte[] nonce,
-                                                     byte[] key);
+                                              byte[] cipherText,
+                                              byte[] mac,
+                                              long cipherTextLen,
+                                              byte[] nonce,
+                                              byte[] key);
+
 
 
     //// -------------------------------------------|
@@ -254,12 +261,12 @@ public class Sodium {
 
 
     public native int crypto_box_easy(
-            byte[] cipherText,
-            byte[] message,
-            long messageLen,
-            byte[] nonce,
-            byte[] publicKey,
-            byte[] secretKey
+        byte[] cipherText,
+        byte[] message,
+        long messageLen,
+        byte[] nonce,
+        byte[] publicKey,
+        byte[] secretKey
     );
 
     public native int crypto_box_open_easy(
@@ -272,30 +279,30 @@ public class Sodium {
     );
 
     public native int crypto_box_detached(byte[] cipherText,
-                                          byte[] mac,
-                                          byte[] message,
-                                          long messageLen,
-                                          byte[] nonce,
-                                          byte[] publicKey,
-                                          byte[] secretKey);
+                                   byte[] mac,
+                                   byte[] message,
+                                   long messageLen,
+                                   byte[] nonce,
+                                   byte[] publicKey,
+                                   byte[] secretKey);
 
     public native int crypto_box_open_detached(byte[] message,
-                                               byte[] cipherText,
-                                               byte[] mac,
-                                               long cipherTextLen,
-                                               byte[] nonce,
-                                               byte[] publicKey,
-                                               byte[] secretKey);
+                                        byte[] cipherText,
+                                        byte[] mac,
+                                        long cipherTextLen,
+                                        byte[] nonce,
+                                        byte[] publicKey,
+                                        byte[] secretKey);
 
     public native int crypto_box_beforenm(byte[] k, byte[] publicKey, byte[] secretKey);
 
 
     public native int crypto_box_easy_afternm(
-            byte[] cipherText,
-            byte[] message,
-            long messageLen,
-            byte[] nonce,
-            byte[] key
+        byte[] cipherText,
+        byte[] message,
+        long messageLen,
+        byte[] nonce,
+        byte[] key
     );
 
     public native int crypto_box_open_easy_afternm(
@@ -314,20 +321,22 @@ public class Sodium {
     );
 
     public native int crypto_box_open_detached_afternm(byte[] message,
-                                                       byte[] cipherText,
-                                                       byte[] mac,
-                                                       long cipherTextLen,
-                                                       byte[] nonce,
-                                                       byte[] key);
+                                        byte[] cipherText,
+                                        byte[] mac,
+                                        long cipherTextLen,
+                                        byte[] nonce,
+                                        byte[] key);
 
 
     public native int crypto_box_seal(byte[] cipher, byte[] message, long messageLen, byte[] publicKey);
 
     public native int crypto_box_seal_open(byte[] m,
-                                           byte[] cipher,
-                                           long cipherLen,
-                                           byte[] publicKey,
-                                           byte[] secretKey);
+                                    byte[] cipher,
+                                    long cipherLen,
+                                    byte[] publicKey,
+                                    byte[] secretKey);
+
+
 
 
     //// -------------------------------------------|
@@ -389,6 +398,7 @@ public class Sodium {
     public native int crypto_sign_ed25519_sk_to_pk(byte[] ed25519PublicKey, byte[] ed25519SecretKey);
 
 
+
     //// -------------------------------------------|
     //// SECRET STREAM
     //// -------------------------------------------|
@@ -409,7 +419,7 @@ public class Sodium {
             long messageLen,
             byte[] additionalData,
             long additionalDataLen,
-            byte tag
+            byte  tag
     );
 
     public native int crypto_secretstream_xchacha20poly1305_init_pull(
@@ -432,20 +442,15 @@ public class Sodium {
     public native void crypto_secretstream_xchacha20poly1305_rekey(SecretStream.State state);
 
     public native int crypto_secretstream_xchacha20poly1305_abytes();
-
     public native int crypto_secretstream_xchacha20poly1305_headerbytes();
-
     public native int crypto_secretstream_xchacha20poly1305_keybytes();
-
     public native int crypto_secretstream_xchacha20poly1305_messagebytes_max();
 
     public native byte crypto_secretstream_xchacha20poly1305_tag_message();
-
     public native byte crypto_secretstream_xchacha20poly1305_tag_push();
-
     public native byte crypto_secretstream_xchacha20poly1305_tag_rekey();
-
     public native byte crypto_secretstream_xchacha20poly1305_tag_final();
+
 
 
     //// -------------------------------------------|
@@ -537,6 +542,7 @@ public class Sodium {
     );
 
 
+
     // XSalsa20
 
     public native void crypto_stream_keygen(byte[] key);
@@ -555,6 +561,9 @@ public class Sodium {
             byte[] nonce,
             byte[] key
     );
+
+
+
 
 
     //// -------------------------------------------|
@@ -609,6 +618,7 @@ public class Sodium {
             Auth.StateHMAC256 state,
             byte[] out
     );
+
 
 
     public native void crypto_auth_hmacsha512256_keygen(byte[] key);
@@ -687,6 +697,9 @@ public class Sodium {
     public native int crypto_shorthash_keygen(byte[] key);
 
 
+
+
+
     //// -------------------------------------------|
     //// GENERIC HASH
     //// -------------------------------------------|
@@ -700,13 +713,13 @@ public class Sodium {
     );
 
     public native int crypto_generichash_init(byte[] state,
-                                              byte[] key,
-                                              int keyLength,
-                                              int outLen);
+                                       byte[] key,
+                                       int keyLength,
+                                       int outLen);
 
     public native int crypto_generichash_update(byte[] state,
-                                                byte[] in,
-                                                long inLen);
+                                         byte[] in,
+                                         long inLen);
 
     public native int crypto_generichash_final(byte[] state, byte[] out, int outLen);
 
@@ -728,6 +741,7 @@ public class Sodium {
                                             byte[] in,
                                             byte[] k,
                                             byte[] c);
+
 
 
     //// -------------------------------------------|
@@ -922,16 +936,16 @@ public class Sodium {
     );
 
     public native int crypto_aead_aes256gcm_encrypt_detached(
-            byte[] cipher,
-            byte[] mac,
-            long[] macLenAddress,
-            byte[] message,
-            long messageLen,
-            byte[] additionalData,
-            long additionalDataLen,
-            byte[] nSec,
-            byte[] nPub,
-            byte[] key
+        byte[] cipher,
+        byte[] mac,
+        long[] macLenAddress,
+        byte[] message,
+        long messageLen,
+        byte[] additionalData,
+        long additionalDataLen,
+        byte[] nSec,
+        byte[] nPub,
+        byte[] key
     );
 
     public native int crypto_aead_aes256gcm_decrypt_detached(
@@ -945,6 +959,7 @@ public class Sodium {
             byte[] nPub,
             byte[] key
     );
+
 
 
     public native int crypto_aead_aes256gcm_beforenm(

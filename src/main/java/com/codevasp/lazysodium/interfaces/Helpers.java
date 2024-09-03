@@ -19,7 +19,6 @@ public interface Helpers {
 
         /**
          * Binary to hexadecimal. This method does not null terminate strings.
-         *
          * @param bin The binary bytes you want to convert to a string.
          * @return A hexadecimal string solely made up of the characters 0123456789ABCDEF.
          */
@@ -28,7 +27,6 @@ public interface Helpers {
         /**
          * Hexadecimal to binary. Does not null terminate the binary
          * array.
-         *
          * @param hex Hexadecimal string (a string that's
          *            made up of the characters 0123456789ABCDEF)
          *            to convert to a binary array.

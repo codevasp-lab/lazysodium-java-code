@@ -23,7 +23,6 @@ public class FileLoader extends ResourceLoader {
 
     /**
      * Get an instance of the loader.
-     *
      * @return Returns this loader instantiated.
      */
     public static FileLoader get() {
@@ -34,10 +33,9 @@ public class FileLoader extends ResourceLoader {
     /**
      * Load a file/directory from your resource folder using a relative path.
      * This will return your file or directory with global read, write and execute.
-     *
      * @param relativePath Relative path to your file or directory.
      * @return The file your directory.
-     * @throws IOException        If at any point processing of the resource file fails.
+     * @throws IOException If at any point processing of the resource file fails.
      * @throws URISyntaxException If cannot find the resource file.
      */
     public File load(String relativePath, Class outsideClass) throws IOException, URISyntaxException {
@@ -48,11 +46,10 @@ public class FileLoader extends ResourceLoader {
      * Load a file/directory from your resource folder with permissions
      * you set. On windows, any type of read, write and execute permissions will
      * be set appropriately.
-     *
      * @param relativePath Relative path to your file or directory.
-     * @param permissions  A set of permissions.
+     * @param permissions A set of permissions.
      * @return The file your directory.
-     * @throws IOException        If at any point processing of the resource file fails.
+     * @throws IOException If at any point processing of the resource file fails.
      * @throws URISyntaxException If cannot find the resource file.
      */
     public File load(String relativePath, Set<PosixFilePermission> permissions, Class outsideClass)

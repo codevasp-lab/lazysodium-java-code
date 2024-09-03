@@ -15,11 +15,11 @@ import com.codevasp.lazysodium.utils.Key;
 public interface KeyDerivation {
 
     int MASTER_KEY_BYTES = 32,
-            CONTEXT_BYTES = 8,
-            BLAKE2B_BYTES_MIN = 16,
-            BLAKE2B_BYTES_MAX = 64,
-            BYTES_MIN = BLAKE2B_BYTES_MIN,
-            BYTES_MAX = BLAKE2B_BYTES_MAX;
+        CONTEXT_BYTES = 8,
+        BLAKE2B_BYTES_MIN = 16,
+        BLAKE2B_BYTES_MAX = 64,
+        BYTES_MIN = BLAKE2B_BYTES_MIN,
+        BYTES_MAX = BLAKE2B_BYTES_MAX;
 
     interface Native {
 

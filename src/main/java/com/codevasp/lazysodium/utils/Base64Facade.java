@@ -10,6 +10,5 @@ package com.codevasp.lazysodium.utils;
 
 public interface Base64Facade {
     String encode(byte[] cipher);
-
     byte[] decode(String cipherText);
 }

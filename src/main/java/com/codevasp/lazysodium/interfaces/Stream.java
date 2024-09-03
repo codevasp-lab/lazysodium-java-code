@@ -17,32 +17,32 @@ public interface Stream {
     // REGULAR CHACHA
 
     int CHACHA20_NONCEBYTES = 8,
-            CHACHA20_KEYBYTES = 32;
+        CHACHA20_KEYBYTES = 32;
     long CHACHA20_MESSAGEBYTES_MAX = Constants.SIZE_MAX;
 
 
     // IETF CHACHA
 
     int CHACHA20_IETF_NONCEBYTES = 12,
-            CHACHA20_IETF_KEYBYTES = 32;
+        CHACHA20_IETF_KEYBYTES = 32;
     long CHACHA20_IETF_MESSAGEBYTES_MAX = Constants.GB_256;
 
 
     // SALSA20
 
     int SALSA20_NONCEBYTES = 12,
-            SALSA20_KEYBYTES = 32;
+        SALSA20_KEYBYTES = 32;
     long SALSA20_MESSAGEBYTES_MAX = Constants.SIZE_MAX;
 
 
     // XSALSA20
 
     int XSALSA20_NONCEBYTES = 24,
-            XSALSA20_KEYBYTES = 32;
+        XSALSA20_KEYBYTES = 32;
     long XSALSA20_MESSAGEBYTES_MAX = Constants.SIZE_MAX;
 
     int NONCEBYTES = XSALSA20_NONCEBYTES,
-            KEYBYTES = XSALSA20_KEYBYTES;
+        KEYBYTES = XSALSA20_KEYBYTES;
     long MESSAGEBYTES_MAX = XSALSA20_MESSAGEBYTES_MAX;
 
 
@@ -52,6 +52,7 @@ public interface Stream {
         SALSA20,
         XSALSA20,
     }
+
 
 
     interface Native {
@@ -158,6 +159,7 @@ public interface Stream {
         );
 
     }
+
 
 
     interface Lazy {
