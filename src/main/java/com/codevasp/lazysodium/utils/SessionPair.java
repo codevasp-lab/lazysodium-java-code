@@ -21,7 +21,7 @@ public class SessionPair {
 
     public SessionPair(String rx, String tx) {
         this.rx = LazySodium.toBin(rx);
-        this.tx = LazySodium.toBin(tx);
+        this.tx =  LazySodium.toBin(tx);
     }
 
     public byte[] getRx() {

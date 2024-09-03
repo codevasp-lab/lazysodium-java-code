@@ -9,11 +9,11 @@
 package com.codevasp.lazysodium.interfaces;
 
 
+
 public interface Random {
 
     /**
      * Return a unsigned int byte 0 and 0xffffffff included.
-     *
      * @return A random byte.
      */
     long randomBytesRandom();
@@ -23,7 +23,6 @@ public interface Random {
      * Unlike randombytes_random() % upper_bound, it guarantees a uniform distribution
      * of the possible output values even when upper_bound is not a power of 2. Note
      * that an upper_bound less than 2 leaves only a single element to be chosen, namely 0.
-     *
      * @param upperBound
      * @return A uniformly random unsigned int.
      */
@@ -31,7 +30,6 @@ public interface Random {
 
     /**
      * Get a random number of bytes.
-     *
      * @param size The length of the byte array to return.
      * @return Random byte array.
      */
@@ -39,7 +37,6 @@ public interface Random {
 
     /**
      * Get deterministically random bytes given a seed.
-     *
      * @param size Size of byte array to return.
      * @param seed Seed to provide.
      * @return Deterministically random byte array.
@@ -49,7 +46,6 @@ public interface Random {
 
     /**
      * Get a random number of bytes to use in a nonce.
-     *
      * @param size The size of the byte array to return.
      * @return Random nonce array.
      * @see #randomBytesBuf(int)

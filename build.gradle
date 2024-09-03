@@ -19,7 +19,7 @@ plugins {
 ext {
     artifactId = "lazysodium-java-code"
     groupId = "com.codevasp"
-    version = '1.0.0'
+    version = '1.0.1'
     description = "Lazy sodium (Java) makes it effortless for Java " +
             "developers to get started with Libsodium's cryptography."
 }
@@ -52,7 +52,7 @@ mavenPublishing {
     signAllPublications()
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-    coordinates("com.codevasp", "lazysodium-java-code", "1.0.0")
+    coordinates("com.codevasp", "lazysodium-java-code", "1.0.1")
 
     pom {
         name = 'lazysodium-java-code'

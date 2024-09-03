@@ -10,6 +10,5 @@ package com.codevasp.lazysodium.interfaces;
 
 public interface MessageEncoder {
     String encode(byte[] cipher);
-
     byte[] decode(String cipherText);
 }

@@ -11,6 +11,8 @@ package com.codevasp.lazysodium.utils;
 import com.codevasp.lazysodium.Sodium;
 import com.codevasp.lazysodium.interfaces.MessageEncoder;
 
+import java.util.Base64;
+
 public class Base64MessageEncoder implements MessageEncoder {
 
     @Override

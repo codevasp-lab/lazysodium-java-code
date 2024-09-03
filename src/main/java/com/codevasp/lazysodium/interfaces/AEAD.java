@@ -24,22 +24,24 @@ public interface AEAD {
     // REGULAR CHACHA
 
     int CHACHA20POLY1305_KEYBYTES = 32,
-            CHACHA20POLY1305_NPUBBYTES = 8,
-            CHACHA20POLY1305_ABYTES = 16;
+        CHACHA20POLY1305_NPUBBYTES = 8,
+        CHACHA20POLY1305_ABYTES = 16;
+
 
 
     // IETF CHACHA
 
     int CHACHA20POLY1305_IETF_ABYTES = 16,
-            CHACHA20POLY1305_IETF_KEYBYTES = 32,
-            CHACHA20POLY1305_IETF_NPUBBYTES = 12;
+        CHACHA20POLY1305_IETF_KEYBYTES = 32,
+        CHACHA20POLY1305_IETF_NPUBBYTES = 12;
+
 
 
     // This is XCHACHA not CHACHA.
 
     int XCHACHA20POLY1305_IETF_KEYBYTES = 32,
-            XCHACHA20POLY1305_IETF_ABYTES = 16,
-            XCHACHA20POLY1305_IETF_NPUBBYTES = 24;
+        XCHACHA20POLY1305_IETF_ABYTES = 16,
+        XCHACHA20POLY1305_IETF_NPUBBYTES = 24;
 
 
     // AES256
@@ -50,12 +52,14 @@ public interface AEAD {
     int AES256GCM_ABYTES = 16;
 
 
+
     enum Method {
         CHACHA20_POLY1305,
         CHACHA20_POLY1305_IETF,
         XCHACHA20_POLY1305_IETF,
         AES256GCM,
     }
+
 
 
     interface Native {
@@ -112,6 +116,8 @@ public interface AEAD {
         );
 
 
+
+
         // ietf
 
         void cryptoAeadChaCha20Poly1305IetfKeygen(byte[] key);
@@ -164,6 +170,8 @@ public interface AEAD {
                 byte[] nPub,
                 byte[] key
         );
+
+
 
 
         // xchacha
@@ -280,15 +288,16 @@ public interface AEAD {
     }
 
 
+
     interface Lazy {
 
         Key keygen(Method method);
 
         String encrypt(String m,
-                       String additionalData,
-                       byte[] nPub,
-                       Key k,
-                       AEAD.Method method);
+                      String additionalData,
+                      byte[] nPub,
+                      Key k,
+                      Method method);
 
         String encrypt(
                 String m,
@@ -304,7 +313,7 @@ public interface AEAD {
                 String additionalData,
                 byte[] nPub,
                 Key k,
-                AEAD.Method method
+                Method method
         ) throws AEADBadTagException;
 
         String decrypt(
@@ -338,18 +347,19 @@ public interface AEAD {
     }
 
 
+
     class StateAES extends Structure {
 
-        public byte[] arr = new byte[512];
+        public static class ByReference extends StateAES implements Structure.ByReference {
+
+        }
 
         @Override
         protected List<String> getFieldOrder() {
             return Arrays.asList("arr");
         }
 
-        public static class ByReference extends StateAES implements Structure.ByReference {
-
-        }
+        public byte[] arr = new byte[512];
 
     }
 

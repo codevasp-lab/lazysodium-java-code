@@ -29,7 +29,6 @@ public class SharedLibraryLoader extends ResourceLoader {
 
     /**
      * Get an instance of the loader.
-     *
      * @return Returns this loader instantiated.
      */
     public static SharedLibraryLoader get() {

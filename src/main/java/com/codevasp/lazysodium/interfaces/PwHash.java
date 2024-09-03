@@ -8,6 +8,7 @@
 
 package com.codevasp.lazysodium.interfaces;
 
+
 import com.codevasp.lazysodium.exceptions.SodiumException;
 import com.codevasp.lazysodium.utils.BaseChecker;
 import com.codevasp.lazysodium.utils.Constants;
@@ -20,40 +21,43 @@ import static com.codevasp.lazysodium.utils.Constants.UNSIGNED_INT;
 
 public interface PwHash {
 
+
     // Argon2 constants
+
     int ARGON2ID_SALTBYTES = 16,
-            ARGON2ID_BYTES_MIN = 16,
-            ARGON2ID_STR_BYTES = 128,
-            SALTBYTES = ARGON2ID_SALTBYTES,
-            STR_BYTES = ARGON2ID_STR_BYTES;
+        ARGON2ID_BYTES_MIN = 16,
+        ARGON2ID_STR_BYTES = 128,
+        SALTBYTES = ARGON2ID_SALTBYTES,
+        STR_BYTES = ARGON2ID_STR_BYTES;
 
     long
-            ARGON2ID_OPSLIMIT_MIN = 1L,
-            ARGON2ID_OPSLIMIT_MAX = Constants.UNSIGNED_INT,
-            ARGON2ID_OPSLIMIT_INTERACTIVE = 2L,
-            ARGON2ID_OPSLIMIT_MODERATE = 3L,
-            ARGON2ID_OPSLIMIT_SENSITIVE = 4L,
-            OPSLIMIT_MIN = ARGON2ID_OPSLIMIT_MIN,
-            OPSLIMIT_MAX = ARGON2ID_OPSLIMIT_MAX,
-            OPSLIMIT_MODERATE = ARGON2ID_OPSLIMIT_MODERATE,
-            OPSLIMIT_INTERACTIVE = ARGON2ID_OPSLIMIT_INTERACTIVE,
-            OPSLIMIT_SENSITIVE = ARGON2ID_OPSLIMIT_SENSITIVE;
+        ARGON2ID_OPSLIMIT_MIN = 1L,
+        ARGON2ID_OPSLIMIT_MAX = Constants.UNSIGNED_INT,
+        ARGON2ID_OPSLIMIT_INTERACTIVE = 2L,
+        ARGON2ID_OPSLIMIT_MODERATE = 3L,
+        ARGON2ID_OPSLIMIT_SENSITIVE = 4L,
+        OPSLIMIT_MIN = ARGON2ID_OPSLIMIT_MIN,
+        OPSLIMIT_MAX = ARGON2ID_OPSLIMIT_MAX,
+        OPSLIMIT_MODERATE = ARGON2ID_OPSLIMIT_MODERATE,
+        OPSLIMIT_INTERACTIVE = ARGON2ID_OPSLIMIT_INTERACTIVE,
+        OPSLIMIT_SENSITIVE = ARGON2ID_OPSLIMIT_SENSITIVE;
+
 
     int
-            ARGON2ID_MEMLIMIT_MIN = 8192,
-            ARGON2ID_MEMLIMIT_MAX = UNSIGNED_INT,
-            ARGON2ID_MEMLIMIT_INTERACTIVE = 67108864, // 67 megabytes
-            ARGON2ID_MEMLIMIT_MODERATE = 268435456, // 268 megabytes
-            ARGON2ID_MEMLIMIT_SENSITIVE = 1073741824, // 1 gigabyte
-            ARGON2ID_PASSWD_MIN = 0,
-            ARGON2ID_PASSWD_MAX = Constants.UNSIGNED_INT,
-            ARGON2ID_BYTES_MAX = Constants.UNSIGNED_INT,
+        ARGON2ID_MEMLIMIT_MIN = 8192,
+        ARGON2ID_MEMLIMIT_MAX = UNSIGNED_INT,
+        ARGON2ID_MEMLIMIT_INTERACTIVE = 67108864, // 67 megabytes
+        ARGON2ID_MEMLIMIT_MODERATE = 268435456, // 268 megabytes
+        ARGON2ID_MEMLIMIT_SENSITIVE = 1073741824, // 1 gigabyte
+        ARGON2ID_PASSWD_MIN = 0,
+        ARGON2ID_PASSWD_MAX = Constants.UNSIGNED_INT,
+        ARGON2ID_BYTES_MAX = Constants.UNSIGNED_INT,
 
-    PASSWD_MIN = ARGON2ID_PASSWD_MIN,
-            PASSWD_MAX = ARGON2ID_PASSWD_MAX,
+        PASSWD_MIN = ARGON2ID_PASSWD_MIN,
+        PASSWD_MAX = ARGON2ID_PASSWD_MAX,
 
-    BYTES_MIN = ARGON2ID_BYTES_MIN,
-            BYTES_MAX = ARGON2ID_BYTES_MAX;
+        BYTES_MIN = ARGON2ID_BYTES_MIN,
+        BYTES_MAX = ARGON2ID_BYTES_MAX;
 
     NativeLong
             MEMLIMIT_MIN = new NativeLong(ARGON2ID_MEMLIMIT_MIN),
@@ -61,6 +65,8 @@ public interface PwHash {
             MEMLIMIT_SENSITIVE = new NativeLong(ARGON2ID_MEMLIMIT_SENSITIVE),
             MEMLIMIT_MODERATE = new NativeLong(ARGON2ID_MEMLIMIT_MODERATE),
             MEMLIMIT_MAX = new NativeLong(ARGON2ID_MEMLIMIT_MAX);
+
+
 
 
     class Checker extends BaseChecker {
@@ -82,16 +88,16 @@ public interface PwHash {
                                        long opsLimit,
                                        NativeLong memLimit)
                 throws SodiumException {
-            if (!PwHash.Checker.saltIsCorrect(saltBytesLen)) {
+            if (!Checker.saltIsCorrect(saltBytesLen)) {
                 throw new SodiumException("The salt provided is not the correct length.");
             }
-            if (!PwHash.Checker.passwordIsCorrect(passwordBytesLen)) {
+            if (!Checker.passwordIsCorrect(passwordBytesLen)) {
                 throw new SodiumException("The password provided is not the correct length.");
             }
-            if (!PwHash.Checker.opsLimitIsCorrect(opsLimit)) {
+            if (!Checker.opsLimitIsCorrect(opsLimit)) {
                 throw new SodiumException("The opsLimit provided is not the correct value.");
             }
-            if (!PwHash.Checker.memLimitIsCorrect(memLimit)) {
+            if (!Checker.memLimitIsCorrect(memLimit)) {
                 throw new SodiumException("The memLimit provided is not the correct value.");
             }
             return true;
@@ -117,7 +123,7 @@ public interface PwHash {
          *                 Between {@link PwHash#OPSLIMIT_MIN} and {@link PwHash#OPSLIMIT_MAX}.
          * @param memLimit The amount of memory to use.
          *                 Between {@link PwHash#MEMLIMIT_MIN} and {@link PwHash#MEMLIMIT_MAX}.
-         * @param alg The algorithm to use. Please use {@link PwHash.Alg#PWHASH_ALG_ARGON2ID13} for now.
+         * @param alg The algorithm to use. Please use {@link Alg#PWHASH_ALG_ARGON2ID13} for now.
          * @return True if the hash succeeded.
          */
         boolean cryptoPwHash(byte[] outputHash,
@@ -143,10 +149,10 @@ public interface PwHash {
          * @see #cryptoPwHashStrVerify(byte[], byte[], int)
          */
         boolean cryptoPwHashStr(byte[] outputStr,
-                                byte[] password,
-                                int passwordLen,
-                                long opsLimit,
-                                NativeLong memLimit);
+                              byte[] password,
+                              int passwordLen,
+                              long opsLimit,
+                               NativeLong memLimit);
 
         /**
          * Verifies a hashed password. Remember: you must add
@@ -185,7 +191,7 @@ public interface PwHash {
          *                 Between {@link PwHash#OPSLIMIT_MIN} and {@link PwHash#OPSLIMIT_MAX}.
          * @param memLimit The amount of memory to use.
          *                 Between {@link PwHash#MEMLIMIT_MIN} and {@link PwHash#MEMLIMIT_MAX}.
-         * @param alg The algorithm to use. Defaults to {@link PwHash.Alg#PWHASH_ALG_ARGON2ID13}.
+         * @param alg The algorithm to use. Defaults to {@link Alg#PWHASH_ALG_ARGON2ID13}.
          * @return A hash of the password in bytes.
          * @throws SodiumException If the password is too short or the opsLimit is not correct.
          */
@@ -200,7 +206,7 @@ public interface PwHash {
         /**
          * The most minimal way of hashing a given password.
          * We auto-generate the salt and use the default
-         * hashing algorithm {@link PwHash.Alg}.
+         * hashing algorithm {@link Alg}.
          * @param password The password string to hash.
          * @param opsLimit The number of cycles to perform whilst hashing.
          *                 Between {@link PwHash#OPSLIMIT_MIN}
@@ -217,7 +223,7 @@ public interface PwHash {
 
         /**
          * Hashes a string and removes all the null bytes. Uses the
-         * hashing algorithm {@link PwHash.Alg}.
+         * hashing algorithm {@link Alg}.
          * @param password The password string to hash.
          * @param opsLimit The number of cycles to perform whilst hashing.
          *                 Between {@link PwHash#OPSLIMIT_MIN}
@@ -279,4 +285,6 @@ public interface PwHash {
             return map;
         }
     }
+
+
 }

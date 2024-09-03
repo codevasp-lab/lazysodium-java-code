@@ -9,10 +9,10 @@
 package com.codevasp.lazysodium;
 
 import com.codevasp.lazysodium.exceptions.SodiumException;
-import com.codevasp.lazysodium.interfaces.MessageEncoder;
 import com.codevasp.lazysodium.interfaces.Scrypt;
 import com.codevasp.lazysodium.interfaces.StreamJava;
 import com.codevasp.lazysodium.utils.Key;
+import com.codevasp.lazysodium.interfaces.MessageEncoder;
 
 import java.nio.charset.Charset;
 

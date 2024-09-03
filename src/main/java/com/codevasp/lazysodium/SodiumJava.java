@@ -46,13 +46,6 @@ public class SodiumJava extends Sodium {
 
     // Scrypt
 
-    public static List<Class> getClassesToRegister() {
-        final List<Class> classes = new ArrayList<>();
-        classes.add(Sodium.class);
-        classes.add(SodiumJava.class);
-        return classes;
-    }
-
     public native int crypto_pwhash_scryptsalsa208sha256(
             byte[] out,
             long outLen,
@@ -89,14 +82,14 @@ public class SodiumJava extends Sodium {
             int bufLen
     );
 
-
-    // Salsa20 12 rounds
-
     public native int crypto_pwhash_scryptsalsa208sha256_str_needs_rehash(
             byte[] password,
             long opsLimit,
             long memLimit
     );
+
+
+    // Salsa20 12 rounds
 
     public native void crypto_stream_salsa2012_keygen(byte[] key);
 
@@ -115,6 +108,7 @@ public class SodiumJava extends Sodium {
             byte[] key
     );
 
+
     public native void crypto_stream_salsa208_keygen(byte[] key);
 
     public native int crypto_stream_salsa208(
@@ -124,9 +118,6 @@ public class SodiumJava extends Sodium {
             byte[] key
     );
 
-
-    // XChaCha20
-
     public native int crypto_stream_salsa208_xor(
             byte[] cipher,
             byte[] message,
@@ -134,6 +125,9 @@ public class SodiumJava extends Sodium {
             byte[] nonce,
             byte[] key
     );
+
+
+    // XChaCha20
 
     public native int crypto_stream_xchacha20(
             byte[] c,
@@ -160,5 +154,12 @@ public class SodiumJava extends Sodium {
     );
 
     public native void crypto_stream_xchacha20_keygen(byte[] key);
+
+    public static List<Class> getClassesToRegister() {
+        final List<Class> classes = new ArrayList<>();
+        classes.add(Sodium.class);
+        classes.add(SodiumJava.class);
+        return classes;
+    }
 
 }

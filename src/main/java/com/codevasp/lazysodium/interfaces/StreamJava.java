@@ -15,12 +15,12 @@ import com.codevasp.lazysodium.utils.Key;
 public interface StreamJava extends Stream {
 
     int SALSA2012_KEYBYTES = 32, SALSA2012_NONCEBYTES = 8,
-            SALSA208_KEYBYTES = 32, SALSA208_NONCEBYTES = 8,
-            XCHACHA20_KEYBYTES = 32, XCHACHA20_NONCEBYTES = 24;
+        SALSA208_KEYBYTES = 32, SALSA208_NONCEBYTES = 8,
+        XCHACHA20_KEYBYTES = 32, XCHACHA20_NONCEBYTES = 24;
 
     long SALSA2012_MESSAGEBYTES_MAX = Constants.SIZE_MAX,
-            SALSA208_MESSAGEBYTES_MAX = Constants.SIZE_MAX,
-            XCHACHA20_MESSAGEBYTES_MAX = Constants.SIZE_MAX;
+         SALSA208_MESSAGEBYTES_MAX = Constants.SIZE_MAX,
+         XCHACHA20_MESSAGEBYTES_MAX = Constants.SIZE_MAX;
 
 
     enum Method {
@@ -99,28 +99,29 @@ public interface StreamJava extends Stream {
     }
 
 
+
     interface Lazy extends Stream.Lazy {
 
-        Key cryptoStreamKeygen(StreamJava.Method method);
+        Key cryptoStreamKeygen(Method method);
 
         byte[] cryptoStream(
                 byte[] nonce,
                 Key key,
-                StreamJava.Method method
+                Method method
         );
 
         String cryptoStreamXor(
                 String message,
                 byte[] nonce,
                 Key key,
-                StreamJava.Method method
+                Method method
         );
 
         String cryptoStreamXorDecrypt(
                 String cipher,
                 byte[] nonce,
                 Key key,
-                StreamJava.Method method
+                Method method
         );
 
         String cryptoStreamXorIc(
@@ -128,7 +129,7 @@ public interface StreamJava extends Stream {
                 byte[] nonce,
                 long ic,
                 Key key,
-                StreamJava.Method method
+                Method method
         );
 
         String cryptoStreamXorIcDecrypt(
@@ -136,7 +137,7 @@ public interface StreamJava extends Stream {
                 byte[] nonce,
                 long ic,
                 Key key,
-                StreamJava.Method method
+                Method method
         );
 
     }

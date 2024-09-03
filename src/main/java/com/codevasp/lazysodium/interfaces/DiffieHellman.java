@@ -23,17 +23,16 @@ public interface DiffieHellman {
     interface Native {
 
         boolean cryptoScalarMultBase(byte[] publicKey, byte[] secretKey);
-
         boolean cryptoScalarMult(byte[] shared, byte[] secretKey, byte[] publicKey);
 
     }
+
 
 
     interface Lazy {
 
         /**
          * Generate a public key from a private key.
-         *
          * @param secretKey Provide the secret key.
          * @return The public key and the provided secret key.
          */
@@ -43,7 +42,6 @@ public interface DiffieHellman {
         /**
          * Generate a shared key from another user's public key
          * and a secret key.
-         *
          * @param publicKey Another user's public key.
          * @param secretKey A secret key.
          * @return Shared secret key.

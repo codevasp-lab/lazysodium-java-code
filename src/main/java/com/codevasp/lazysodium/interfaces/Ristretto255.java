@@ -2,7 +2,6 @@ package com.codevasp.lazysodium.interfaces;
 
 import com.codevasp.lazysodium.LazySodium;
 import com.codevasp.lazysodium.exceptions.SodiumException;
-
 import java.math.BigInteger;
 import java.util.Arrays;
 
@@ -13,7 +12,7 @@ public interface Ristretto255 {
     int RISTRETTO255_SCALAR_BYTES = 32;
     int RISTRETTO255_NON_REDUCED_SCALAR_BYTES = 64;
     BigInteger RISTRETTO255_L = BigInteger.valueOf(2).pow(252).add(
-            new BigInteger("27742317777372353535851937790883648493", 10));
+        new BigInteger("27742317777372353535851937790883648493", 10));
 
     static byte[] scalarToBytes(BigInteger n) {
         return scalarToBytes(n, true);
@@ -22,11 +21,11 @@ public interface Ristretto255 {
     static byte[] scalarToBytes(BigInteger n, boolean reduced) {
         byte[] bigEndianBytes = n.toByteArray();
         int expectedCount =
-                reduced ? RISTRETTO255_SCALAR_BYTES : RISTRETTO255_NON_REDUCED_SCALAR_BYTES;
+            reduced ? RISTRETTO255_SCALAR_BYTES : RISTRETTO255_NON_REDUCED_SCALAR_BYTES;
 
         if (bigEndianBytes.length > expectedCount) {
             throw new IllegalArgumentException(
-                    "The scalar value is too big to be represented in " + expectedCount + " bytes");
+                "The scalar value is too big to be represented in " + expectedCount + " bytes");
         }
 
         // Convert big-endian to little-endian
@@ -268,7 +267,7 @@ public interface Ristretto255 {
          * @return the result
          */
         RistrettoPoint cryptoScalarmultRistretto255(BigInteger n, RistrettoPoint point)
-                throws SodiumException;
+            throws SodiumException;
 
         /**
          * Multiplies the given Ristretto255 {@code point} by the scalar {@code n} and returns the
@@ -279,7 +278,7 @@ public interface Ristretto255 {
          * @return the result
          */
         RistrettoPoint cryptoScalarmultRistretto255(String nEnc, RistrettoPoint point)
-                throws SodiumException;
+            throws SodiumException;
 
         /**
          * Multiplies the given Ristretto255 {@code point} by the scalar {@code n} and returns the
@@ -291,7 +290,7 @@ public interface Ristretto255 {
          * @return the result
          */
         RistrettoPoint cryptoScalarmultRistretto255(byte[] n, RistrettoPoint point)
-                throws SodiumException;
+            throws SodiumException;
 
         /**
          * Multiplies the Ristretto255 base point by the scalar {@code n} and returns the result.
@@ -326,7 +325,7 @@ public interface Ristretto255 {
          * @return the sum
          */
         RistrettoPoint cryptoCoreRistretto255Add(RistrettoPoint p, RistrettoPoint q)
-                throws SodiumException;
+            throws SodiumException;
 
         /**
          * Subtracts two given Ristretto255 points {@code p} and {@code q} and returns the result.
@@ -336,7 +335,7 @@ public interface Ristretto255 {
          * @return the difference
          */
         RistrettoPoint cryptoCoreRistretto255Sub(RistrettoPoint p, RistrettoPoint q)
-                throws SodiumException;
+            throws SodiumException;
 
         /**
          * Creates a random scalar value in {@code [0, l[} with {@code L} being the order of the
@@ -724,86 +723,85 @@ public interface Ristretto255 {
     }
 
     class Checker {
-        private Checker() {
-        }
+        private Checker() {}
 
         public static void ensurePointFits(byte[] point) {
             if (point == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as target arrays");
+                    "Null pointers are not allowed as target arrays");
             }
 
             if (point.length < RISTRETTO255_BYTES) {
                 throw new IllegalArgumentException(
-                        "To hold a Ristretto255 point, the array must be "
-                                + RISTRETTO255_BYTES
-                                + " bytes in size");
+                    "To hold a Ristretto255 point, the array must be "
+                        + RISTRETTO255_BYTES
+                        + " bytes in size");
             }
         }
 
         public static void ensureScalarFits(byte[] scalar) {
             if (scalar == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as target arrays");
+                    "Null pointers are not allowed as target arrays");
             }
 
             if (scalar.length < RISTRETTO255_SCALAR_BYTES) {
                 throw new IllegalArgumentException(
-                        "To hold a Ristretto255 scalar, the array must be "
-                                + RISTRETTO255_SCALAR_BYTES
-                                + " bytes in size");
+                    "To hold a Ristretto255 scalar, the array must be "
+                        + RISTRETTO255_SCALAR_BYTES
+                        + " bytes in size");
             }
         }
 
         public static void checkPoint(byte[] point) {
             if (point == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as Ristretto255 points");
+                    "Null pointers are not allowed as Ristretto255 points");
             }
 
             if (point.length != RISTRETTO255_BYTES) {
                 throw new IllegalArgumentException("A Ristretto255 point must be "
-                        + RISTRETTO255_BYTES
-                        + " bytes in size");
+                                                       + RISTRETTO255_BYTES
+                                                       + " bytes in size");
             }
         }
 
         public static void checkHash(byte[] hash) {
             if (hash == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as Ristretto255 hashes");
+                    "Null pointers are not allowed as Ristretto255 hashes");
             }
 
             if (hash.length != RISTRETTO255_HASH_BYTES) {
                 throw new IllegalArgumentException("A hash for use with Ristretto255 must be "
-                        + RISTRETTO255_HASH_BYTES
-                        + " bytes in size");
+                                                       + RISTRETTO255_HASH_BYTES
+                                                       + " bytes in size");
             }
         }
 
         public static void checkScalar(byte[] scalar) {
             if (scalar == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as Ristretto255 scalars");
+                    "Null pointers are not allowed as Ristretto255 scalars");
             }
 
             if (scalar.length != RISTRETTO255_SCALAR_BYTES) {
                 throw new IllegalArgumentException("A Ristretto255 scalar must be "
-                        + RISTRETTO255_SCALAR_BYTES
-                        + " bytes in size");
+                                                       + RISTRETTO255_SCALAR_BYTES
+                                                       + " bytes in size");
             }
         }
 
         public static void checkNonReducedScalar(byte[] scalar) {
             if (scalar == null) {
                 throw new IllegalArgumentException(
-                        "Null pointers are not allowed as non-reduced Ristretto255 scalars");
+                    "Null pointers are not allowed as non-reduced Ristretto255 scalars");
             }
 
             if (scalar.length != RISTRETTO255_NON_REDUCED_SCALAR_BYTES) {
                 throw new IllegalArgumentException("A non-reduced Ristretto255 scalar must be "
-                        + RISTRETTO255_NON_REDUCED_SCALAR_BYTES
-                        + " bytes in size");
+                                                       + RISTRETTO255_NON_REDUCED_SCALAR_BYTES
+                                                       + " bytes in size");
             }
         }
     }
@@ -824,107 +822,6 @@ public interface Ristretto255 {
 
         private RistrettoPoint(LazySodium ls, String encoded) {
             this(ls, ls.decodeFromString(encoded));
-        }
-
-        /**
-         * Returns the zero element (identity element) of the Ristretto255 group.
-         *
-         * @param ls the {@link LazySodium} instance
-         * @return the identity element of Ristretto255
-         */
-        public static RistrettoPoint zero(LazySodium ls) {
-            return fromBytes(ls, pointBuffer());
-        }
-
-        /**
-         * Returns a random element of the Ristretto255 group.
-         *
-         * @param ls the {@link LazySodium} instance
-         * @return a random element of Ristretto255
-         */
-        public static RistrettoPoint random(LazySodium ls) {
-            return ls.cryptoCoreRistretto255Random();
-        }
-
-        /**
-         * Returns the base point of the Ristretto255 group.
-         *
-         * @param ls the {@link LazySodium} instance
-         * @return the base point of Ristretto255
-         */
-        public static RistrettoPoint base(LazySodium ls) throws SodiumException {
-            return ls.cryptoScalarmultRistretto255Base(BigInteger.ONE);
-        }
-
-        /**
-         * Creates a new {@link RistrettoPoint} from the hexadecimal representation. The hexadecimal
-         * representation must be a valid canonical encoding.
-         *
-         * @param ls  the {@link LazySodium} instance
-         * @param hex the Ristretto255 canonical encoding in hexadecimal notation
-         * @return the corresponding {@link RistrettoPoint}
-         */
-        public static RistrettoPoint fromHex(LazySodium ls, String hex) {
-            return new RistrettoPoint(ls, ls.toBinary(hex));
-        }
-
-        /**
-         * Creates a new {@link RistrettoPoint} from the encoded representation, using the
-         * {@link LazySodium}'s associated {@link MessageEncoder}. The decoded bytes must be a valid
-         * canonical encoding.
-         *
-         * @param ls      the {@link LazySodium} instance
-         * @param encoded the encoded Ristretto255 point
-         * @return the corresponding {@link RistrettoPoint}
-         */
-        public static RistrettoPoint fromString(LazySodium ls, String encoded) {
-            return new RistrettoPoint(ls, encoded);
-        }
-
-        /**
-         * Creates a new {@link RistrettoPoint} from the binary representation. The binary
-         * representation must be a valid canonical encoding.
-         *
-         * @param ls    the {@link LazySodium} instance
-         * @param bytes the Ristretto255 canonical encoding
-         * @return the corresponding {@link RistrettoPoint}
-         */
-        public static RistrettoPoint fromBytes(LazySodium ls, byte[] bytes) {
-            return new RistrettoPoint(ls, bytes);
-        }
-
-        /**
-         * Maps the encoded input to a {@link RistrettoPoint}, using the {@link LazySodium}'s
-         * associated {@link MessageEncoder}. The resulting bytes are hashed using SHA-512 and
-         * mapped to the Ristretto 255 group, using {@code crypto_code_ristretto255_from_hash},
-         * i.e. the standard hash-to-group algorithm.
-         *
-         * @param ls           the {@link LazySodium} instance
-         * @param encodedInput the encoded bytes
-         * @return the mapped {@link RistrettoPoint}
-         * @throws SodiumException if the mapping failed
-         */
-        public static RistrettoPoint hashToPoint(LazySodium ls, String encodedInput)
-                throws SodiumException {
-            return hashToPoint(ls, ls.decodeFromString(encodedInput));
-        }
-
-        /**
-         * Maps the input to a {@link RistrettoPoint}, by calculating the SHA-512 hash and
-         * mapping it to the Ristretto 255 group, using {@code crypto_code_ristretto255_from_hash},
-         * i.e. the standard hash-to-group algorithm.
-         *
-         * @param ls    the {@link LazySodium} instance
-         * @param input the input bytes
-         * @return the mapped {@link RistrettoPoint}
-         * @throws SodiumException if the mapping failed
-         */
-        public static RistrettoPoint hashToPoint(LazySodium ls, byte[] input)
-                throws SodiumException {
-            byte[] hash = new byte[Hash.SHA512_BYTES];
-            ls.cryptoHashSha512(hash, input, input.length);
-
-            return ls.cryptoCoreRistretto255FromHash(hash);
         }
 
         @Override
@@ -971,7 +868,6 @@ public interface Ristretto255 {
 
         /**
          * Encodes the point using the {@link LazySodium}'s associated {@link MessageEncoder}.
-         *
          * @return the encoded point
          */
         public String encode() {
@@ -1031,6 +927,107 @@ public interface Ristretto255 {
          */
         public RistrettoPoint negate() throws SodiumException {
             return zero(ls).minus(this);
+        }
+
+        /**
+         * Returns the zero element (identity element) of the Ristretto255 group.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @return the identity element of Ristretto255
+         */
+        public static RistrettoPoint zero(LazySodium ls) {
+            return fromBytes(ls, pointBuffer());
+        }
+
+        /**
+         * Returns a random element of the Ristretto255 group.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @return a random element of Ristretto255
+         */
+        public static RistrettoPoint random(LazySodium ls) {
+            return ls.cryptoCoreRistretto255Random();
+        }
+
+        /**
+         * Returns the base point of the Ristretto255 group.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @return the base point of Ristretto255
+         */
+        public static RistrettoPoint base(LazySodium ls) throws SodiumException {
+            return ls.cryptoScalarmultRistretto255Base(BigInteger.ONE);
+        }
+
+        /**
+         * Creates a new {@link RistrettoPoint} from the hexadecimal representation. The hexadecimal
+         * representation must be a valid canonical encoding.
+         *
+         * @param ls  the {@link LazySodium} instance
+         * @param hex the Ristretto255 canonical encoding in hexadecimal notation
+         * @return the corresponding {@link RistrettoPoint}
+         */
+        public static RistrettoPoint fromHex(LazySodium ls, String hex) {
+            return new RistrettoPoint(ls, ls.toBinary(hex));
+        }
+
+        /**
+         * Creates a new {@link RistrettoPoint} from the encoded representation, using the
+         * {@link LazySodium}'s associated {@link MessageEncoder}. The decoded bytes must be a valid
+         * canonical encoding.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @param encoded the encoded Ristretto255 point
+         * @return the corresponding {@link RistrettoPoint}
+         */
+        public static RistrettoPoint fromString(LazySodium ls, String encoded) {
+            return new RistrettoPoint(ls, encoded);
+        }
+
+        /**
+         * Creates a new {@link RistrettoPoint} from the binary representation. The binary
+         * representation must be a valid canonical encoding.
+         *
+         * @param ls    the {@link LazySodium} instance
+         * @param bytes the Ristretto255 canonical encoding
+         * @return the corresponding {@link RistrettoPoint}
+         */
+        public static RistrettoPoint fromBytes(LazySodium ls, byte[] bytes) {
+            return new RistrettoPoint(ls, bytes);
+        }
+
+        /**
+         * Maps the encoded input to a {@link RistrettoPoint}, using the {@link LazySodium}'s
+         * associated {@link MessageEncoder}. The resulting bytes are hashed using SHA-512 and
+         * mapped to the Ristretto 255 group, using {@code crypto_code_ristretto255_from_hash},
+         * i.e. the standard hash-to-group algorithm.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @param encodedInput the encoded bytes
+         * @return the mapped {@link RistrettoPoint}
+         * @throws SodiumException if the mapping failed
+         */
+        public static RistrettoPoint hashToPoint(LazySodium ls, String encodedInput)
+            throws SodiumException {
+            return hashToPoint(ls, ls.decodeFromString(encodedInput));
+        }
+
+        /**
+         * Maps the input to a {@link RistrettoPoint}, by calculating the SHA-512 hash and
+         * mapping it to the Ristretto 255 group, using {@code crypto_code_ristretto255_from_hash},
+         * i.e. the standard hash-to-group algorithm.
+         *
+         * @param ls the {@link LazySodium} instance
+         * @param input the input bytes
+         * @return the mapped {@link RistrettoPoint}
+         * @throws SodiumException if the mapping failed
+         */
+        public static RistrettoPoint hashToPoint(LazySodium ls, byte[] input)
+            throws SodiumException {
+            byte[] hash = new byte[Hash.SHA512_BYTES];
+            ls.cryptoHashSha512(hash, input, input.length);
+
+            return ls.cryptoCoreRistretto255FromHash(hash);
         }
     }
 }

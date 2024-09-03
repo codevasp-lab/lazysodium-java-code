@@ -29,6 +29,43 @@ import java.util.List;
 public final class LibraryLoader {
 
     private final Logger logger = LoggerFactory.getLogger(Constants.LAZYSODIUM_JAVA);
+
+    /**
+     * Library loading mode controls which libraries are attempted to be loaded (installed in the system or bundled
+     * in the Lazysodium JAR) and in which order.
+     */
+    public enum Mode {
+
+        /**
+         * Try to load the system sodium first, if that fails — load the bundled version.
+         *
+         * <p>This is the recommended mode, because it allows the clients to upgrade the sodium library
+         * as soon as it is available instead of waiting for lazysodium release and releasing a new version of
+         * the client library/application.
+         */
+        PREFER_SYSTEM,
+
+        /**
+         * Load the bundled native libraries first, then fallback to finding it in the system.
+         */
+        PREFER_BUNDLED,
+
+        /**
+         * Load the bundled version, ignoring the system.
+         *
+         * <p>This mode might be useful if the system sodium turns out to be outdated and cannot be upgraded.
+         */
+        BUNDLED_ONLY,
+
+        /**
+         * Load the system sodium only, ignoring the bundled.
+         *
+         * <p>This mode is recommended if it is required to use the system sodium only, and the application
+         * must fail if it is not installed.
+         */
+        SYSTEM_ONLY,
+    }
+
     private List<Class> classes = new ArrayList<>();
 
     public LibraryLoader(List<Class> classesToRegister) {
@@ -36,47 +73,12 @@ public final class LibraryLoader {
     }
 
     /**
-     * Returns the absolute path to sodium library inside JAR (beginning with '/'), e.g. /linux/libsodium.so.
-     *
-     * @return The path to the libsodium binary.
-     */
-    public static String getSodiumPathInResources() {
-        boolean is64Bit = Native.POINTER_SIZE == 8;
-        if (Platform.isMac()) {
-            // check for Apple Silicon
-            if (Platform.isARM()) {
-                return getPath("mac/aarch64", "libsodium.dylib");
-            }
-        }
-
-        if (Platform.isLinux()) {
-            if (is64Bit) {
-                if (Platform.isARM()) {
-                    return getPath("linux64/arm", "libsodium.so");
-                }
-                if (Platform.isIntel()) {
-                    return getPath("linux64/x86", "libsodium.so");
-                }
-            }
-        }
-
-        String message = String.format("Unsupported platform: %s/%s", System.getProperty("os.name"),
-                System.getProperty("os.arch"));
-        throw new LibraryLoadingException(message);
-    }
-
-    private static String getPath(String folder, String name) {
-        String separator = "/";
-        return folder + separator + name;
-    }
-
-    /**
      * Loads the sodium library and registers the native methods of {@link Sodium}
      * and {@link SodiumJava} using the specified loading mode.
      * The library will be loaded at most once.
      *
-     * @param mode           controls which sodium library (installed in the system or bundled in the JAR)
-     *                       is loaded, and in which order
+     * @param mode controls which sodium library (installed in the system or bundled in the JAR)
+     *     is loaded, and in which order
      * @param systemFallBack If loading directly fails then it will fall to the system fallback specified here
      * @throws LibraryLoadingException if fails to load the library
      * @see Native#register(Class, String)
@@ -132,38 +134,37 @@ public final class LibraryLoader {
     }
 
     /**
-     * Library loading mode controls which libraries are attempted to be loaded (installed in the system or bundled
-     * in the Lazysodium JAR) and in which order.
+     * Returns the absolute path to sodium library inside JAR (beginning with '/'), e.g. /linux/libsodium.so.
+     * @return The path to the libsodium binary.
+     * We only return mac aarch64, linux arm or x86
      */
-    public enum Mode {
+    public static String getSodiumPathInResources() {
+        boolean is64Bit = Native.POINTER_SIZE == 8;
+        if (Platform.isMac()) {
+            // check for Apple Silicon
+            if (Platform.isARM()) {
+                return getPath("mac/aarch64", "libsodium.dylib");
+            }
+        }
 
-        /**
-         * Try to load the system sodium first, if that fails — load the bundled version.
-         *
-         * <p>This is the recommended mode, because it allows the clients to upgrade the sodium library
-         * as soon as it is available instead of waiting for lazysodium release and releasing a new version of
-         * the client library/application.
-         */
-        PREFER_SYSTEM,
+        if (Platform.isLinux()) {
+            if (is64Bit) {
+                if (Platform.isARM()) {
+                    return getPath("linux64/arm", "libsodium.so");
+                }
+                if (Platform.isIntel()) {
+                    return getPath("linux64/x86", "libsodium.so");
+                }
+            }
+        }
 
-        /**
-         * Load the bundled native libraries first, then fallback to finding it in the system.
-         */
-        PREFER_BUNDLED,
+        String message = String.format("Unsupported platform: %s/%s", System.getProperty("os.name"),
+                System.getProperty("os.arch"));
+        throw new LibraryLoadingException(message);
+    }
 
-        /**
-         * Load the bundled version, ignoring the system.
-         *
-         * <p>This mode might be useful if the system sodium turns out to be outdated and cannot be upgraded.
-         */
-        BUNDLED_ONLY,
-
-        /**
-         * Load the system sodium only, ignoring the bundled.
-         *
-         * <p>This mode is recommended if it is required to use the system sodium only, and the application
-         * must fail if it is not installed.
-         */
-        SYSTEM_ONLY,
+    private static String getPath(String folder, String name) {
+        String separator = "/";
+        return folder + separator + name;
     }
 }
